@@ -1,4 +1,5 @@
-const uuid = require("uuid");
+// const uuid = require("uuid");
+const { v4: uuidv4 } = require('uuid');
 const path = require("path");
 const resizer = require('node-image-resizer');
 const fs = require("fs");
@@ -24,7 +25,7 @@ class FileService {
                 fs.unlinkSync(`./images/photos/${userId}/large/${files[0]}`);
                 fs.unlinkSync(`./images/photos/${userId}/small/small_${files[0]}`);
             }
-            const fileName = userId + '.jpg';
+            const fileName = uuidv4() + '.jpg';
             const filePath = path.resolve(`./images/photos/${userId}/large`, fileName);
             await file.mv(filePath);
             await resizer(filePath, setup);
